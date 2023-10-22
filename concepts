@@ -1,0 +1,71 @@
+A criação de uma coluna adicional vai servir somente para o calculo.
+
+Então escolher as colunas que receberão o calculo. No caso a seguir foram escolhidas as colunas valor_unitario e quantidade.
+
+Foi etão adicionado o operador * para multiplicar uma pela outra. 
+
+O resultado obtido ficou escrito na linha 16
+
+SELECT	codigo_venda,
+		matricula_vendedor,
+		codigo_loja,
+		codigo_produto,
+		preco_custo,
+		valor_unitario,
+		quantidade,
+		valor_unitario * quantidade,
+		dt_entrega,
+		dt_entrega
+	FROM venda
+
+Para nomear a nova coluna, basta inserir o alias AS e o nome da nova coluna que no caso é valor_final_venda. Note que a virgula foi deslocada para depois do comando AS + nome da nova coluna
+
+SELECT	codigo_venda,
+		matricula_vendedor,
+		codigo_loja,
+		codigo_produto,
+		preco_custo,
+		valor_unitario,
+		quantidade,
+		valor_unitario * quantidade AS valor_final_venda,
+		dt_entrega,
+		dt_entrega
+	FROM venda
+
+Adicionando o calculo do valor final da venda:
+SELECT	codigo_venda,
+		matricula_vendedor,
+		codigo_loja,
+		codigo_produto,
+		preco_custo,
+		preco_custo * quantidade AS preco_final_custo,
+		valor_unitario,
+		quantidade,
+		valor_unitario * quantidade AS valor_final_venda,
+		dt_entrega,
+		dt_entrega
+	FROM venda
+
+Calculo do lucro
+
+Basta adicionar a seguinte linha:
+Observe a inclusão de parenteses para definir a precedencia do calculo de multiplicação antes do calculo de soma. E no final o nome da nova coluna é definido sem a necessidade do alias AS.
+  
+(valor_unitario * quantidade) - (preco_custo * quantidade) lucro,
+
+O novo código fica assim:
+
+SELECT	codigo_venda,
+		matricula_vendedor,
+		codigo_loja,
+		codigo_produto,
+		preco_custo,
+		preco_custo * quantidade AS preco_final_custo,
+		valor_unitario,
+		quantidade,
+		valor_unitario * quantidade AS valor_final_venda,
+		(valor_unitario * quantidade) - (preco_custo * quantidade) lucro,
+		dt_entrega,
+		dt_entrega
+	FROM venda
+
